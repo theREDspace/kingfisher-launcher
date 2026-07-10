@@ -1,0 +1,10 @@
+/node_modules
+dist
+coverage
+PLAN.md
+
+.DS_Store
+design-reference/
+*~
+.env
+.env.*

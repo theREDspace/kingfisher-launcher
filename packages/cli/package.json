@@ -1,0 +1,57 @@
+{
+  "name": "@redspace/kingfisher-launcher",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "kingfisher-launcher": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "public"
+  ],
+  "scripts": {
+    "build": "node scripts/copy-app-dist.mjs && tsup src/index.ts --format esm --clean",
+    "prepublishOnly": "node scripts/copy-app-dist.mjs && tsup src/index.ts --format esm --clean",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theREDspace/kingfisher-launcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/theREDspace/kingfisher-launcher/issues"
+  },
+  "homepage": "https://github.com/theREDspace/kingfisher-launcher#readme",
+  "author": "REDspace",
+  "license": "MIT",
+  "description": "Launch apps on devices from your browser - an unofficial open-source utility for application launching and syndication protocol testing",
+  "keywords": [
+    "cli",
+    "comcast",
+    "kingfisher",
+    "set-top-box",
+    "device-testing",
+    "app-launcher"
+  ],
+  "dependencies": {
+    "commander": "^15.0.0",
+    "express": "^5.2.1",
+    "open": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^24.13.2",
+    "@vitest/coverage-v8": "^4.1.10",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

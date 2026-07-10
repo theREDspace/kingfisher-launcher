@@ -1,0 +1,16 @@
+{
+  "name": "kingfisher-launcher",
+  "private": true,
+  "version": "0.1.0",
+  "description": "An unofficial, open-source utility client for launching apps and testing syndication protocols on Comcast devices.",
+  "author": "REDspace",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter @redspace/kingfisher-launcher-app dev",
+    "build": "pnpm --filter @redspace/kingfisher-launcher-app build && pnpm --filter @redspace/kingfisher-launcher build",
+    "test": "pnpm -r test",
+    "bump": "node scripts/bump-version.mjs"
+  },
+  "packageManager": "pnpm@10.32.1"
+}
