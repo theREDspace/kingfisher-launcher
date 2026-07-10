@@ -18,13 +18,13 @@ export function Footer() {
       <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-center gap-4.5 px-6 pt-6.5 pb-7.5">
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/theREDspace"
+            href="https://github.com/theREDspace/kingfisher-launcher"
             target="_blank"
             rel="noopener"
             className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground-strong hover:text-navy"
           >
             <GitHubIcon size={18} />
-            theREDspace
+            theREDspace/kingfisher-launcher
           </a>
           <span className="h-5 w-px bg-border" />
         </div>
