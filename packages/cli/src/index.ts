@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 import { Command } from "commander";
 import open from "open";
 import { startServer } from "./server.js";
@@ -44,7 +46,10 @@ export function createProgram(): Command {
   return program;
 }
 
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+// argv[1] is npm's bin symlink under a global install
+const isMainModule =
+  process.argv[1] !== undefined &&
+  import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
 if (isMainModule) {
   createProgram()
     .parseAsync(process.argv)
