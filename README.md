@@ -65,7 +65,7 @@ Kingfisher API endpoint.
 ## Security considerations
 
 API keys are **long-lived static credentials**, stored **in browser
-`localStorage`** on the launcher's fixed `localhost` origin. Anything that can run
+`localStorage`** on the launcher's fixed `127.0.0.1` origin. Anything that can run
 JavaScript on that origin can read them.
 
 With that in mind:
