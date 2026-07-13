@@ -29,6 +29,20 @@ Select a device, enter a URL and App ID, and launch - all from your browser.
 - **Import/Export** - Export orgs with their presets to JSON, or import them
   on another machine.
 
+
+
+
+
+
+https://github.com/user-attachments/assets/d962aadd-dafa-4b56-a131-a4e98bb6a24d
+
+
+
+
+
+
+
+
 ## Prerequisites
 
 - **A Kingfisher API key** - required to connect to your organization's
