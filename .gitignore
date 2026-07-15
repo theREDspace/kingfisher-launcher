@@ -8,3 +8,4 @@ design-reference/
 *~
 .env
 .env.*
+.claude/*.lock
