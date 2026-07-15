@@ -50,6 +50,9 @@ export function createProgram(): Command {
 const isMainModule =
   process.argv[1] !== undefined &&
   import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href;
+
+// Only run the CLI when this file is executed directly, not when it's imported
+// (e.g. by tests or other modules).
 if (isMainModule) {
   createProgram()
     .parseAsync(process.argv)
