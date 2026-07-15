@@ -34,7 +34,8 @@ Select a device, enter a URL and App ID, and launch - all from your browser.
 
 
 
-https://github.com/user-attachments/assets/d962aadd-dafa-4b56-a131-a4e98bb6a24d
+
+https://github.com/user-attachments/assets/265499f5-ddcb-495d-a218-682dfe991f0a
 
 
 
