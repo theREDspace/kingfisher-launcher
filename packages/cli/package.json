@@ -31,14 +31,25 @@
   "homepage": "https://github.com/theREDspace/kingfisher-launcher#readme",
   "author": "REDspace",
   "license": "MIT",
-  "description": "Launch apps on devices from your browser - an unofficial open-source utility for application launching and syndication protocol testing",
+  "description": "Launch and sideload apps on Comcast Xfinity X1 devices registered in IBIS — an unofficial open-source CLI that opens a local web UI for device selection, app launching, and screen preview.",
   "keywords": [
-    "cli",
     "comcast",
+    "xfinity",
+    "x1",
+    "Xi6",
+    "XiOne",
+    "ibis",
     "kingfisher",
+    "sideload",
+    "sideloading",
+    "app-launcher",
+    "launcher",
     "set-top-box",
+    "stb",
+    "rdk",
     "device-testing",
-    "app-launcher"
+    "developer-tools",
+    "cli"
   ],
   "dependencies": {
     "commander": "^15.0.0",

@@ -2,7 +2,7 @@
   "name": "kingfisher-launcher",
   "private": true,
   "version": "0.1.0",
-  "description": "An unofficial, open-source utility client for launching apps and testing syndication protocols on Comcast devices.",
+  "description": "An unofficial, open-source CLI for launching and sideloading apps on Comcast Xfinity X1 devices registered in IBIS.",
   "author": "REDspace",
   "license": "MIT",
   "type": "module",
