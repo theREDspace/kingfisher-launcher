@@ -15,10 +15,8 @@ Please **do not** open a public GitHub issue for security vulnerabilities.
 
 Instead, report it privately using [GitHub's private vulnerability reporting](https://github.com/theREDspace/kingfisher-launcher/security/advisories/new) (Security tab → "Report a vulnerability"). This requires the maintainers to have private vulnerability reporting enabled for the repository (Settings → Code security → Private vulnerability reporting).
 
-<!-- TODO: replace with a monitored security contact email if GitHub private reporting isn't enabled, e.g. security@redspace.com -->
-
 We'll acknowledge new reports as soon as possible and aim to provide an initial assessment as soon as possible. Once a fix is available, we'll coordinate disclosure timing with the reporter.
 
 ## Scope
 
-Kingfisher Launcher is a local development utility: it runs a server bound to `127.0.0.1` and stores organization/API-key data in browser `localStorage`. Reports involving exposure of stored Kingfisher API keys, unintended network exposure of the local server, or vulnerabilities in the Kingfisher API client are in scope.
+Kingfisher Launcher is a local development utility: it runs a server bound to `127.0.0.1` and stores organization/API-key data in browser `localStorage` (see [Security considerations](./README.md#security-considerations) in the README for the storage model and its known limitations). Reports involving exposure of stored Kingfisher API keys, unintended network exposure of the local server, or vulnerabilities in the Kingfisher API client are in scope.

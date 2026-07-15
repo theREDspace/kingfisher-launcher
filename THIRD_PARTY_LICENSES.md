@@ -29,8 +29,21 @@ Regenerate at any time to get an up-to-date report; run `pnpm -r licenses list -
 
 All licenses above are permissive (or, for MPL-2.0, weak/file-level copyleft). **No GPL, AGPL, or LGPL dependencies were found** in the resolved dependency tree as of this writing.
 
-## Notable dependencies
+## Copyleft (MPL-2.0) dependencies
 
-- **`lightningcss`** (dev dependency, via Tailwind CSS v4's build pipeline) — **MPL-2.0**. This is a file-level copyleft license: it only requires that modifications to `lightningcss`'s own source files be shared under MPL-2.0. It does not extend to code that merely uses it as a build tool, so it does not affect the MIT licensing of this project's code.
+The two MPL-2.0 entries in the summary are one upstream project, [`lightningcss`](https://github.com/parcel-bundler/lightningcss):
 
-All other dependencies are standard, permissively-licensed public npm packages (React, Vite, Express, Commander, Tailwind CSS, etc.) with no internal or private REDspace-registry packages in the tree.
+- **`lightningcss`** — the JS package
+- **`lightningcss-darwin-arm64`** — its per-platform native binary (on other platforms/CI the resolved binary is a different `lightningcss-*` package, e.g. `lightningcss-linux-x64-gnu`)
+
+Both are **dev-only** dependencies, pulled in via Tailwind CSS v4's build pipeline. They are not shipped in the published CLI artifact.
+
+**What MPL-2.0 requires of us:** it is a file-level copyleft license. Using the package — even a locally patched copy — imposes no obligation, and it does not affect the MIT licensing of this project's code. The obligation triggers only if we **modify `lightningcss`'s own source files and distribute the result**: those modified files must remain under MPL-2.0 with their source made available.
+
+**House rule:** avoid modifying MPL-licensed packages. If a fix is unavoidable, apply it via `pnpm patch` so the patch file is committed to this (public) repo, and submit the change upstream — upstreaming isn't legally required, but it's the standard practice and removes any ongoing source-availability obligation.
+
+When regenerating this report, re-check for new copyleft entries and update this section:
+
+```bash
+pnpm -r licenses list | grep -iE "MPL|GPL"
+```
