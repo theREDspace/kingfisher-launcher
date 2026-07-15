@@ -76,6 +76,20 @@ add or edit an organization to set its Server URL. The API key is also stored
 per organization and never sent to any server other than the configured
 Kingfisher API endpoint.
 
+## Security considerations
+
+API keys are **long-lived static credentials**, stored **in browser
+`localStorage`** on the launcher's fixed `127.0.0.1` origin. Anything that can run
+JavaScript on that origin can read them.
+
+With that in mind:
+
+- Remove organizations from the UI when you no longer need them - this deletes the
+  stored key.
+- Rotate keys if a machine or browser profile may have been compromised.
+
+To report a vulnerability, see [SECURITY.md](./SECURITY.md).
+
 ## Development
 
 ```bash
