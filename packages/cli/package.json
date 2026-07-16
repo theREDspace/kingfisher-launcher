@@ -9,6 +9,9 @@
     "dist",
     "public"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "node scripts/copy-app-dist.mjs && tsup src/index.ts --format esm --clean",
     "prepublishOnly": "node scripts/copy-app-dist.mjs && tsup src/index.ts --format esm --clean",

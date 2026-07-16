@@ -16,3 +16,16 @@ if (!existsSync(appDist)) {
 rmSync(targetDir, { recursive: true, force: true });
 cpSync(appDist, targetDir, { recursive: true });
 console.log(`Copied app build from ${appDist} to ${targetDir}`);
+
+// README and LICENSE live at the repo root; npm only ships files from the
+// package dir, so copy them in so the published tarball (and npm page) has them.
+const repoRoot = path.resolve(__dirname, "../../..");
+for (const file of ["README.md", "LICENSE"]) {
+  const source = path.resolve(repoRoot, file);
+  if (!existsSync(source)) {
+    console.error(`Cannot find ${source}.`);
+    process.exit(1);
+  }
+  cpSync(source, path.resolve(__dirname, "..", file));
+  console.log(`Copied ${file} from repo root`);
+}
