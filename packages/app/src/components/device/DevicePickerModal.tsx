@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -14,14 +14,21 @@ interface DevicePickerModalProps {
 }
 
 export function DevicePickerModal({ open, onOpenChange, onSelectDevice }: DevicePickerModalProps) {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         showCloseButton={false}
+        initialFocus={searchInputRef}
         className="flex max-h-[86vh] w-full max-w-[840px] flex-col gap-0 rounded-[20px] p-0 shadow-modal ring-0 sm:max-w-[840px]"
       >
         {open && (
-          <DevicePickerModalBody onClose={() => onOpenChange(false)} onSelectDevice={onSelectDevice} />
+          <DevicePickerModalBody
+            onClose={() => onOpenChange(false)}
+            onSelectDevice={onSelectDevice}
+            searchInputRef={searchInputRef}
+          />
         )}
       </DialogContent>
     </Dialog>
@@ -31,9 +38,11 @@ export function DevicePickerModal({ open, onOpenChange, onSelectDevice }: Device
 function DevicePickerModalBody({
   onClose,
   onSelectDevice,
+  searchInputRef,
 }: {
   onClose: () => void;
   onSelectDevice: (device: Device) => void;
+  searchInputRef: React.RefObject<HTMLInputElement | null>;
 }) {
   const { selectedOrg } = useOrgStore();
   const deviceClient = useDeviceClient();
@@ -110,6 +119,7 @@ function DevicePickerModalBody({
             strokeWidth={2}
           />
           <Input
+            ref={searchInputRef}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name, ID, or label…"
