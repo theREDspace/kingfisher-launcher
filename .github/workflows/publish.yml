@@ -26,13 +26,9 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Ensure npm supports OIDC trusted publishing
-        run: npm install -g npm@latest
 
       - name: Build app
         run: pnpm --filter @redspace/kingfisher-launcher-app build
