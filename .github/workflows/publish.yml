@@ -49,6 +49,24 @@ jobs:
             echo "tag=${{ github.event.inputs.dist-tag }}" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Debug OIDC trusted publishing exchange
+        run: |
+          set -euo pipefail
+          id_token_response=$(curl -sf -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=npm:registry.npmjs.org")
+          id_token=$(echo "$id_token_response" | jq -r '.value')
+          echo "Got GitHub OIDC ID token (length: ${#id_token})"
+          http_code=$(curl -s -o /tmp/oidc-exchange-response.json -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer ${id_token}" \
+            -H "Content-Type: application/json" \
+            "https://registry.npmjs.org/-/npm/v1/oidc/token/exchange/package/%40redspace%2Fkingfisher-launcher")
+          echo "npm OIDC token exchange HTTP status: $http_code"
+          if [ "$http_code" = "200" ]; then
+            echo "Exchange succeeded (token withheld from logs)."
+          else
+            cat /tmp/oidc-exchange-response.json
+          fi
+
       - name: Publish CLI package
         run: pnpm publish --access public --no-git-checks --tag "${{ steps.dist-tag.outputs.tag }}"
         working-directory: packages/cli
