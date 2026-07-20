@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -52,5 +53,3 @@ jobs:
       - name: Publish CLI package
         run: pnpm publish --access public --no-git-checks --tag "${{ steps.dist-tag.outputs.tag }}"
         working-directory: packages/cli
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
