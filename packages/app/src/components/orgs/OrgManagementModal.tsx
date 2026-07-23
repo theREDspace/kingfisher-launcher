@@ -66,6 +66,9 @@ function OrgManagementModalBody({
     const result = await pickOrgJsonFile();
     if (!result) return;
     const { orgToAdd, presetsToAdd, matchedOrgId } = deduplicateImport(result, orgs, presets);
+    if (matchedOrgId) {
+      updateOrg(matchedOrgId, result.org);
+    }
     const targetOrgId = matchedOrgId ?? addOrg(orgToAdd!).id;
     for (const preset of presetsToAdd) {
       addPreset({ orgId: targetOrgId, ...preset });

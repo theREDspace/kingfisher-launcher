@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Monitor, Plus, Tv } from "lucide-react";
+import { Info, Monitor, Plus, Tv } from "lucide-react";
 import { DeviceLabels } from "@/components/device/DeviceLabels";
 import { DeviceAliveIndicators } from "@/components/device/DeviceAliveIndicators";
 import type { UseDeviceAliveResult } from "@/lib/useDeviceAlive";
@@ -63,12 +63,12 @@ function SelectedDevice({
   onChangeDevice: () => void;
 }) {
   const [showDetails, setShowDetails] = useState(false);
-  const iconRef = useRef<HTMLDivElement>(null);
+  const [activeTrigger, setActiveTrigger] = useState<HTMLElement | null>(null);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
 
   useEffect(() => {
-    if (showDetails && iconRef.current) {
-      const rect = iconRef.current.getBoundingClientRect();
+    if (showDetails && activeTrigger) {
+      const rect = activeTrigger.getBoundingClientRect();
       setTooltipStyle({
         position: "fixed",
         left: rect.left + rect.width / 2,
@@ -76,25 +76,53 @@ function SelectedDevice({
         transform: "translate(-50%, -50%)",
       });
     }
-  }, [showDetails]);
+  }, [showDetails, activeTrigger]);
 
   const deviceFields = deviceDetails?.device;
   const entries = deviceFields
     ? Object.entries(deviceFields).filter(([, v]) => v !== undefined && v !== null)
     : [];
 
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    };
+  }, []);
+
+  function showDetailsFrom(el: HTMLElement, immediate = false) {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    if (immediate) {
+      setActiveTrigger(el);
+      setShowDetails(true);
+      return;
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveTrigger(el);
+      setShowDetails(true);
+    }, 500);
+  }
+
+  function hideDetails() {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setShowDetails(false);
+  }
+
   return (
     <div className="px-7 py-6.5">
       <div className="flex items-start justify-between gap-4">
         <div className="flex min-w-0 items-center gap-3.5">
           <div
-            ref={iconRef}
             tabIndex={entries.length > 0 ? 0 : undefined}
             aria-label={entries.length > 0 ? "Show device details" : undefined}
-            onMouseEnter={() => setShowDetails(true)}
-            onMouseLeave={() => setShowDetails(false)}
-            onFocus={() => setShowDetails(true)}
-            onBlur={() => setShowDetails(false)}
+            onMouseEnter={(e) => showDetailsFrom(e.currentTarget)}
+            onMouseLeave={hideDetails}
+            onFocus={(e) => showDetailsFrom(e.currentTarget, true)}
+            onBlur={hideDetails}
             className="relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-2xl"
           >
             <div className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-navy-soft text-white">
@@ -102,8 +130,23 @@ function SelectedDevice({
             </div>
           </div>
           <div className="min-w-0">
-            <div className="truncate text-[19px] font-extrabold tracking-tight text-navy">
-              {device.name}
+            <div className="flex items-center gap-1.5">
+              <div className="truncate text-[19px] font-extrabold tracking-tight text-navy">
+                {device.name}
+              </div>
+              {entries.length > 0 && (
+                <button
+                  type="button"
+                  aria-label="Show device info"
+                  onMouseEnter={(e) => showDetailsFrom(e.currentTarget)}
+                  onMouseLeave={hideDetails}
+                  onFocus={(e) => showDetailsFrom(e.currentTarget, true)}
+                  onBlur={hideDetails}
+                  className="shrink-0 cursor-default rounded-full text-slate-800 hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                >
+                  <Info size={15} strokeWidth={2} />
+                </button>
+              )}
             </div>
             <div className="mt-px text-[13px] text-muted-foreground tabular-nums">{device.id}</div>
           </div>

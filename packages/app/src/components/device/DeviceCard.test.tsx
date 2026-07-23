@@ -56,7 +56,7 @@ describe("DeviceCard", () => {
 
       const trigger = screen.getByLabelText("Show device details");
       await userEvent.hover(trigger);
-      expect(screen.getByText("device_model")).toBeInTheDocument();
+      expect(await screen.findByText("device_model")).toBeInTheDocument();
 
       const keyWarning = errorSpy.mock.calls.some((args: unknown[]) =>
         args.some((a) => typeof a === "string" && a.includes("unique") && a.includes("key")),
