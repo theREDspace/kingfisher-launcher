@@ -1,7 +1,7 @@
 {
   "name": "@redspace/kingfisher-launcher-app",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React (Vite) frontend for Kingfisher Launcher, embedded into the @redspace/kingfisher-launcher CLI.",
   "author": "REDspace",
   "license": "MIT",
