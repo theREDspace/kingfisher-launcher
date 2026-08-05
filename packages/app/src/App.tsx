@@ -12,6 +12,7 @@ import { PresetStoreProvider } from "@/store/PresetStoreContext";
 import { loadSession, saveSession } from "@/store/session-storage";
 import { useDeviceClient } from "@/lib/useDeviceClient";
 import { useDeviceAlive } from "@/lib/useDeviceAlive";
+import { useLaunchOnDeviceTool } from "@/lib/webmcp/useLaunchOnDeviceTool";
 import { kingfisher } from "@/lib/kingfisher/client";
 import type { DeviceData } from "@/lib/kingfisher/types";
 import type { Device } from "@/lib/device-client";
@@ -138,6 +139,14 @@ function AppContent() {
       saveSession(selectedOrg, { ...session, appId: value });
     }
   }
+
+  useLaunchOnDeviceTool({
+    org: selectedOrg,
+    deviceClient,
+    onDeviceResolved: selectDevice,
+    onUrlChange: handleUrlChange,
+    onAppIdChange: handleAppIdChange,
+  });
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden">
