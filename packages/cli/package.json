@@ -56,16 +56,16 @@
   ],
   "dependencies": {
     "commander": "^15.0.0",
-    "express": "^5.2.1",
-    "open": "^11.0.0"
+    "express": "^5.3.0",
+    "open": "^11.0.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
-    "@types/node": "^26.2.0",
-    "@vitest/coverage-v8": "^4.1.10",
+    "@types/node": "^26.6.5",
+    "@vitest/coverage-v8": "^5.0.4",
     "tsup": "^8.5.1",
-    "tsx": "^4.23.12",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.4"
   }
 }
